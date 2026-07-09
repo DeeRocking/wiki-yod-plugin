@@ -4,10 +4,10 @@ Skill pour agents de codage (Claude Code) qui rédige, formalise et publie des r
 
 ## Installation
 
-Depuis le dépôt du wiki (qui sert de marketplace) :
+Depuis le dépôt public d'installation (miroir synchronisé automatiquement) :
 
 ```
-/plugin marketplace add https://github.com/DeeRocking/wiki-yod-ingenieurie
+/plugin marketplace add https://github.com/DeeRocking/wiki-yod-plugin
 /plugin install rapport-wiki-yod@wiki-yod
 ```
 
