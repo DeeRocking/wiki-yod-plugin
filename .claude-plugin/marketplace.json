@@ -1,0 +1,16 @@
+{
+  "name": "wiki-yod",
+  "description": "Outillage agent du wiki YOD Ingénierie : rédaction et publication de rapports de découverte technique conformes au schéma du wiki.",
+  "owner": {
+    "name": "YOD Ingénierie"
+  },
+  "plugins": [
+    {
+      "name": "rapport-wiki-yod",
+      "source": "./plugin/rapport-wiki-yod",
+      "description": "Rédige, formalise et publie des rapports de découverte technique sur le wiki YOD Ingénierie",
+      "version": "0.1.0",
+      "author": { "name": "YOD Ingénierie" }
+    }
+  ]
+}

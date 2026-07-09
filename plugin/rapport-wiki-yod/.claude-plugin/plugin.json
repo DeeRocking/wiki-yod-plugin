@@ -1,0 +1,11 @@
+{
+  "name": "rapport-wiki-yod",
+  "displayName": "Rapport Wiki YOD",
+  "version": "0.1.0",
+  "description": "Skill de rédaction et formalisation des rapports de découverte technique pour le wiki YOD Ingénierie : front-matter conforme au schéma, structure chapitres/sections qui alimente la table des matières, publication via l'API du wiki.",
+  "author": {
+    "name": "YOD Ingénierie"
+  },
+  "license": "MIT",
+  "keywords": ["wiki", "rapport", "documentation", "veille"]
+}
