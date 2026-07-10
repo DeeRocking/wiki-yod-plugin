@@ -23,8 +23,8 @@ auteur: <2 à 100 caractères — prénom et nom de l'auteur humain>
 theme: <2 à 60 caractères — thème court et réutilisable, ex. « Frontend », « Bases de données », « Outillage »>
 synopsis: <10 à 500 caractères — 1 à 3 phrases lues dans le catalogue>
 date: 2026-07-08        # optionnelle, format ISO ; défaut = date d'upload
-co_auteurs:             # optionnelle, liste YAML, 10 noms max
-  - Prénom Nom
+co_auteurs:             # optionnelle, liste YAML, 10 entrées max
+  - pseudo-du-membre    # pseudo (recommandé) ou nom exact d'un membre du wiki
 ---
 ```
 
@@ -34,8 +34,11 @@ Règles :
 - `theme` : réutiliser un thème existant du wiki quand c'est pertinent (les thèmes alimentent les filtres et les stats) plutôt que d'en inventer une variante.
 - `synopsis` : c'est la vitrine de l'article dans le catalogue — le soigner.
 - `co_auteurs` : si l'exploration a été menée à plusieurs, les lister ici (l'auteur
-  principal n'y figure pas). Chaque co-auteur est crédité dans les statistiques du wiki
-  et affiché sur l'article ; les doublons sont ignorés.
+  principal n'y figure pas). Chaque entrée doit désigner un **membre du wiki**, par son
+  **pseudo** (recommandé — chaque membre voit le sien sur sa page Mon espace) ou son nom
+  exact ; une entrée inconnue est **refusée à l'upload (422)** — demander son pseudo au
+  co-auteur plutôt que de deviner l'orthographe du nom. Chaque co-auteur est crédité
+  dans les statistiques du wiki et affiché sur l'article ; les doublons sont ignorés.
 
 ## 3. Structure du corps — elle alimente la table des matières
 
