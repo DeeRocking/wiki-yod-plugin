@@ -35,10 +35,33 @@ Règles :
 - `synopsis` : c'est la vitrine de l'article dans le catalogue — le soigner.
 - `co_auteurs` : si l'exploration a été menée à plusieurs, les lister ici (l'auteur
   principal n'y figure pas). Chaque entrée doit désigner un **membre du wiki**, par son
-  **pseudo** (recommandé — chaque membre voit le sien sur sa page Mon espace) ou son nom
-  exact ; une entrée inconnue est **refusée à l'upload (422)** — demander son pseudo au
-  co-auteur plutôt que de deviner l'orthographe du nom. Chaque co-auteur est crédité
-  dans les statistiques du wiki et affiché sur l'article ; les doublons sont ignorés.
+  **pseudo** (recommandé) ou son nom exact ; une entrée inconnue est **refusée à
+  l'upload (422)**. Résoudre les pseudos avec l'annuaire (section suivante) — ne jamais
+  les deviner. Chaque co-auteur est crédité dans les statistiques du wiki et affiché
+  sur l'article ; les doublons sont ignorés.
+
+### Résoudre les co-auteurs avec l'annuaire du wiki
+
+Le wiki expose l'annuaire des membres actifs — le récupérer AVANT de remplir
+`co_auteurs` :
+
+```bash
+curl -sS "$WIKI_YOD_URL/api/membres" -H "Authorization: Bearer $WIKI_YOD_TOKEN"
+# → [{"pseudo": "alice-martin", "nom": "Alice Martin"}, …]
+```
+
+Démarche :
+1. Repérer les personnes ayant participé à l'exploration : demander à l'utilisateur
+   (« qui a co-écrit / participé ? ») et/ou relever les noms présents dans la matière
+   (conversation, notes, commits, documents).
+2. Mapper chaque personne sur l'annuaire : correspondance par nom complet, prénom ou
+   pseudo approchant. Utiliser le **pseudo exact** retourné par l'annuaire dans le
+   front-matter — jamais une variante recomposée.
+3. En cas d'ambiguïté (deux membres proches, personne absente de l'annuaire),
+   **demander à l'utilisateur** de trancher plutôt que de choisir seul. Une personne
+   hors annuaire ne peut pas être créditée : le signaler à l'utilisateur (un admin
+   peut l'inviter depuis la page /admin du wiki).
+4. Récapituler le mapping retenu (Nom → @pseudo) à l'utilisateur avant publication.
 
 ## 3. Structure du corps — elle alimente la table des matières
 
@@ -63,10 +86,11 @@ Un modèle complet est fourni : [modele_rapport.md](modele_rapport.md).
 Vérifier chaque point, corriger avant d'aller plus loin :
 
 1. Le fichier commence bien par `---` et le front-matter contient titre, auteur, theme, synopsis dans les bornes de taille.
-2. Aucun `#` de niveau 1 dans le corps ; au moins deux chapitres `##`.
-3. Toutes les images référencées existent dans `assets/` et sont en chemin relatif.
-4. Le rapport se suffit à lui-même : un collègue qui n'a pas vécu l'exploration comprend le contexte, la découverte et le verdict.
-5. Encodage UTF-8, taille < 1 Mo.
+2. Chaque `co_auteur` correspond à un pseudo de l'annuaire (`GET /api/membres`) et le mapping a été confirmé par l'utilisateur.
+3. Aucun `#` de niveau 1 dans le corps ; au moins deux chapitres `##`.
+4. Toutes les images référencées existent dans `assets/` et sont en chemin relatif.
+5. Le rapport se suffit à lui-même : un collègue qui n'a pas vécu l'exploration comprend le contexte, la découverte et le verdict.
+6. Encodage UTF-8, taille < 1 Mo.
 
 ## 6. Publication (uniquement sur confirmation explicite)
 
